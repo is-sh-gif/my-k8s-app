@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     kubernetesDeploy(
-                        configs: 'k8s/deployment.yaml',
+                        configs: 'my-k8s-app/deployment.yaml',
                         kubeconfigId: 'kubeconfig-jenkins'
                     )
                 }
