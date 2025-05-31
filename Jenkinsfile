@@ -25,7 +25,7 @@ pipeline {
         stage('Push Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('israr170', 'israr170') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'israr170') {
                         docker.image("${IMAGE_NAME}:${env.BUILD_ID}").push()
                     }
                 }
