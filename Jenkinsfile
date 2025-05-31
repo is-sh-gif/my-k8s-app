@@ -22,15 +22,18 @@ pipeline {
             }
         }
 
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://index.docker.io/v1/', 'israr170') {
-                        docker.image("${IMAGE_NAME}:${env.BUILD_ID}").push()
-                    }
-                }
+stage('Push Docker Image') {
+    steps {
+        withDockerRegistry([credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/']) {
+            script {
+                def imageName = "israr170/my-k8s-app:${env.BUILD_NUMBER}"
+                bat "docker tag my-k8s-app:${env.BUILD_NUMBER} ${imageName}"
+                bat "docker push ${imageName}"
             }
         }
+    }
+}
+
 
         stage('Deploy to Kubernetes') {
             steps {
