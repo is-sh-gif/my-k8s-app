@@ -35,10 +35,9 @@ pipeline {
 
        stage('Deploy to Kubernetes') {
             steps {
-                kubernetesDeploy(
-                    configs: 'k8s/deployment.yaml',
-                    kubeconfigId: 'kubeconfig-jenkins'
-                )
+                withKubeConfig([credentialsId: 'kubeconfig-jenkins']) {
+                    sh 'kubectl apply -f k8s/deployment.yaml'
+                }
             }
         }
     }
