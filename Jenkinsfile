@@ -36,7 +36,7 @@ pipeline {
        stage('Deploy to Kubernetes') {
                 steps {
                     withKubeConfig([credentialsId: 'kubeconfig-jenkins']) {
-                        bat 'kubectl apply -f k8s/deployment.yaml'
+                        bat 'kubectl apply -f my-k8s-app/deployment.yaml'
                     }
                 }
             }
