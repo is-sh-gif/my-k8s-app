@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/is-sh-gif/my-k8s-app.git'
+               git branch: 'main', url: 'https://github.com/is-sh-gif/my-k8s-app.git'
+
             }
         }
 
